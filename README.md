@@ -43,7 +43,7 @@ We simulate a real-world open-source environment.
 1.  **Fork** this repository.
 2.  **Clone** your fork:
     ```bash
-    git clone [https://github.com/YOUR-USERNAME/nexus-codebase.git](https://github.com/YOUR-USERNAME/nexus-codebase.git)
+    git clone https://github.com/Nexus-SIT/Nexus-Code-Library.git
     ```
 3.  **Create a Branch** (Never code on main):
     ```bash
@@ -58,4 +58,4 @@ We simulate a real-world open-source environment.
 ---
 
 ### maintainers
-* @YourUsername
+* @ManishRShetty
