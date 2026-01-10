@@ -14,7 +14,7 @@ We enforce a strict folder hierarchy to keep things organized.
 
 ### 1. `academic-labs/` (Strict Compliance)
 Code in this directory must match the college syllabus exactly. It is used for reference during exams/labs.
-* **Structure:** `Subject / Experiment-Name / main.c`
+* **Structure:** `sem-no / subject / main.py`
 * **Requirement:** Must compile without errors and match lab manual output.
 * **No "Refactoring":** Keep it simple and compliant with what the professors expect.
 
