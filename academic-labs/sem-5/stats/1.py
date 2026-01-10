@@ -1,6 +1,6 @@
 # 1. Program on data wrangling: Combining and merging datasets,
 # Reshaping and Pivoting
-# ----------------------------------------------------
+# ---------------------------------------------------
 import pandas as pd
 # ----------------------------------------------------
 # PART 1: COMBINING AND MERGING DATASETS
