@@ -1,26 +1,22 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_california_housing
 
-# 1. Load the dataset
-data = fetch_california_housing()
-df = pd.DataFrame(data.data, columns=data.feature_names)
-df['MedHouseVal'] = data.target  # Add target variable to the dataframe
+# Step 1: Load the California Housing Dataset
+california_data = fetch_california_housing(as_frame=True)
+data = california_data.frame
 
-# 2. Compute the Correlation Matrix
-# This helps understand the linear relationship between features
-corr_matrix = df.corr()
+# Step 2: Compute the correlation matrix
+correlation_matrix = data.corr()
 
-# 3. Visualize the Correlation Matrix using a Heatmap
-plt.figure(figsize=(12, 8))
-sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-plt.title('Correlation Matrix Heatmap (California Housing)')
+# Step 3: Visualize the correlation matrix using a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.title('Correlation Matrix of California Housing Features')
 plt.show()
 
-# 4. Use Pairplot to visualize pairwise relationships
-# Note: Since the dataset has many rows, we sample it for faster visualization
-sns.pairplot(df.sample(500), diag_kind='kde')
-plt.suptitle('Pairwise Relationships between Features', y=1.02)
+# Step 4: Create a pair plot to visualize pairwise relationships
+sns.pairplot(data, diag_kind='kde', plot_kws={'alpha': 0.5})
+plt.suptitle('Pair Plot of California Housing Features', y=1.02)
 plt.show()
