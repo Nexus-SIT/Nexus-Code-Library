@@ -4,8 +4,7 @@ import seaborn as sns
 from sklearn.datasets import fetch_california_housing
 
 # Load the dataset
-data = fetch_california_housing()
-df = pd.DataFrame(data.data, columns=data.feature_names)
+df = pd.read_csv('california_housing.csv')
 
 # 1. Histograms for all numerical features
 df.hist(figsize=(12, 10), bins=30, edgecolor='black')
