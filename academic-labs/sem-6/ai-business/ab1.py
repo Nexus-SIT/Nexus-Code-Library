@@ -1,47 +1,46 @@
-# [span_0](start_span)Program 1[span_0](end_span)
-# [span_1](start_span)ML code to compose Smawit E-Mail[span_1](end_span)
-[span_2](start_span)import nltk #[span_2](end_span)
-[span_3](start_span)from nltk.util import ngrams #[span_3](end_span)
-[span_4](start_span)from collections import defaultdict, Counter #[span_4](end_span)
-[span_5](start_span)nltk.download('punkt') #[span_5](end_span)
-[span_6](start_span)nltk.download('punkt_tab') #[span_6](end_span)
+import nltk
+from nltk.util import ngrams
+from collections import defaultdict, Counter
 
-# [span_7](start_span)Sample email dataset[span_7](end_span)
-[span_8](start_span)emails = [ #[span_8](end_span)
-    [span_9](start_span)"thank you for your email", #[span_9](end_span)
-    [span_10](start_span)"please let me know if you have any questions", #[span_10](end_span)
-    [span_11](start_span)"looking forward to your response", #[span_11](end_span)
-    [span_12](start_span)"thank you for your time and consideration", #[span_12](end_span)
-    [span_13](start_span)"please find the attached document", #[span_13](end_span)
-    [span_14](start_span)[span_15](start_span)"let me know if you need any help" #[span_14](end_span)[span_15](end_span)
-[span_16](start_span)] #[span_16](end_span)
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
-# [span_17](start_span)Tokenize Sentences[span_17](end_span)
-[span_18](start_span)tokens = [] #[span_18](end_span)
-[span_19](start_span)for email in emails: #[span_19](end_span)
-    [span_20](start_span)words = nltk.word_tokenize(email.lower()) #[span_20](end_span)
-    [span_21](start_span)tokens.extend(words) #[span_21](end_span)
+# Sample email dataset
+emails = [
+    "thank you for your email",
+    "please let me know if you have any questions",
+    "looking forward to your response",
+    "thank you for your time and consideration",
+    "please find the attached document",
+    "let me know if you need any help"
+]
 
-# [span_22](start_span)Create trigram model[span_22](end_span)
-[span_23](start_span)model = defaultdict(Counter) #[span_23](end_span)
-[span_24](start_span)for w1, w2, w3 in ngrams(tokens, 3): #[span_24](end_span)
-    [span_25](start_span)model[(w1, w2)][w3] += 1 #[span_25](end_span)
+# Tokenize Sentences
+tokens = []
+for email in emails:
+    words = nltk.word_tokenize(email.lower())
+    tokens.extend(words)
 
-# [span_26](start_span)Function to predict next word[span_26](end_span)
-[span_27](start_span)def predict_next_word(text): #[span_27](end_span)
-    [span_28](start_span)words = nltk.word_tokenize(text.lower()) #[span_28](end_span)
-    [span_29](start_span)if len(words) < 2: #[span_29](end_span)
-        [span_30](start_span)return "Type more words..." #[span_30](end_span)
+# Create trigram model
+model = defaultdict(Counter)
+for w1, w2, w3 in ngrams(tokens, 3):
+    model[(w1, w2)][w3] += 1
+
+# Function to predict next word
+def predict_next_word(text):
+    words = nltk.word_tokenize(text.lower())
+    if len(words) < 2:
+        return "Type more words..."
     
-    [span_31](start_span)last_two = (words[-2], words[-1]) #[span_31](end_span)
-    [span_32](start_span)if last_two in model: #[span_32](end_span)
-        [span_33](start_span)next_word = model[last_two].most_common(1)[0][0] #[span_33](end_span)
-        [span_34](start_span)[span_35](start_span)return next_word #[span_34](end_span)[span_35](end_span)
-    [span_36](start_span)else: #[span_36](end_span)
-        [span_37](start_span)return "No prediction available" #[span_37](end_span)
+    last_two = (words[-2], words[-1])
+    if last_two in model:
+        next_word = model[last_two].most_common(1)[0][0]
+        return next_word
+    else:
+        return "No prediction available"
 
-# [span_38](start_span)Test[span_38](end_span)
-[span_39](start_span)input_text = "thank you" #[span_39](end_span)
-[span_40](start_span)prediction = predict_next_word(input_text) #[span_40](end_span)
-[span_41](start_span)print("Input:", input_text) #[span_41](end_span)
-[span_42](start_span)print("Predicted next word:", prediction) #[span_42](end_span)
+# Test
+input_text = "thank you"
+prediction = predict_next_word(input_text)
+print("Input:", input_text)
+print("Predicted next word:", prediction)
